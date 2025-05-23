@@ -2,7 +2,7 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { products } from "@/data/products";
-import Image from "next/image";
+import ProductImage from "@/components/ProductImage";
 
 const Home = () => {
     const featuredProducts = products.filter(product => product.featured);
@@ -30,17 +30,7 @@ const Home = () => {
                         {featuredProducts.map((product) => (
                             <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition duration-300">
                                 <div className="bg-gray-200 h-64 flex items-center justify-center">
-                                    <div className="relative h-64 w-full">
-                                        <Image
-                                            src={product.image}
-                                            alt={product.name}
-                                            fill
-                                            className="object-cover"
-                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                            placeholder="blur"
-                                            blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjMyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZWVlZWVlIi8+PHRleHQgeD0iNTAlIiB5PSI1JSIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzk5OSI+UHJvZHVjdCBJbWFnZTwvdGV4dD48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1zaXplPSIxNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzk5OSI+ezpwcm9kdWN0Lm5hbWV9PC90ZXh0Pjwvc3ZnPg=="
-                                        />
-                                    </div>
+                                    <ProductImage product={product} />
                                 </div>
                                 <div className="p-6">
                                     <h3 className="text-xl font-semibold text-gray-800">{product.name}</h3>
