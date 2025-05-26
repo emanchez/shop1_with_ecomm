@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { products } from "@/data/products";
@@ -7,10 +7,31 @@ import ProductImage from '@/components/ProductImage';
 
 const Shop = () => {
     const [activeCategory, setActiveCategory] = useState<string | null>(null);
-
+    const [realData, setRealData] = useState(products)
     const filteredProducts = activeCategory 
-        ? products.filter(product => product.category === activeCategory)
-        : products;
+        ? realData.filter(product => product.category === activeCategory)
+        : realData;
+
+    useEffect(() => {
+        const fetchProductData = async () => {
+            try {
+                const res = await fetch('/api/mongo-get'); // Fixed path
+                
+                if (!res.ok) {
+                    throw new Error(`HTTP error! status: ${res.status}`);
+                }
+                
+                const data = await res.json();
+                setRealData(data);
+            } catch (error) {
+                console.error('Failed to fetch product data', error);
+                // Fallback to local products if API fails
+                setRealData(products);
+            }
+        };
+        
+        fetchProductData();
+    }, []); 
 
     return (
         <div className="min-h-screen bg-gray-50">
