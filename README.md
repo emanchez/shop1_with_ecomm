@@ -1,3 +1,4 @@
+I have redone this project using jango located [here](https://github.com/emanchez/shop-project-django)
 This is a generic brand page with merch store ecommerce (visual only, shopping function to be implemented later)
 
 /home 
